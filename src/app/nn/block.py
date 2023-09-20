@@ -1,8 +1,8 @@
 from torch import nn
 
-from nn.attention import MultiHeadV1, MultiHeadV2, MultiHeadV3
-from nn.ff import FeedForwardV1, FeedForwardV2, FeedForwardV3
-from nn.norm import LayerNorm
+from app.nn.attention import MultiHeadV1, MultiHeadV2, MultiHeadV3
+from app.nn.ff import FeedForwardV1, FeedForwardV2, FeedForwardV3
+from app.nn.norm import LayerNorm
 
 
 class BlockV1(nn.Module):

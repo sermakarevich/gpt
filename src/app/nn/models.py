@@ -2,10 +2,10 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from nn.attention import HeadV1, MultiHeadV2
-from nn.block import BlockV1, BlockV2, BlockV3, BlockV4
-from nn.ff import FeedForwardV1
-from nn.norm import LayerNorm
+from app.nn.attention import HeadV1, MultiHeadV2
+from app.nn.block import BlockV1, BlockV2, BlockV3, BlockV4
+from app.nn.ff import FeedForwardV1
+from app.nn.norm import LayerNorm
 
 
 class BigramBaseV1(nn.Module):
@@ -32,7 +32,7 @@ class BigramBaseV2(nn.Module):
 
 class BigramLanguageModelV1(BigramBaseV1):
 	"""Just a simple embedding layer."""
-	def __init__(self, vocab_size):
+	def __init__(self, vocab_size, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, vocab_size)
 
@@ -53,7 +53,7 @@ class BigramLanguageModelV1(BigramBaseV1):
 
 class BigramLanguageModelV2(BigramBaseV1):
 	"""Embedding layer + linear layer"""
-	def __init__(self, vocab_size, n_embed):
+	def __init__(self, vocab_size, n_embed, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.fc = nn.Linear(n_embed, vocab_size)
@@ -76,7 +76,7 @@ class BigramLanguageModelV2(BigramBaseV1):
 
 class BigramLanguageModelV3(BigramBaseV2):
 	"""Embedding layer + linear layer + positional embedding"""
-	def __init__(self, vocab_size, block_size, n_embed, device):
+	def __init__(self, vocab_size, block_size, n_embed, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)
@@ -105,7 +105,7 @@ class BigramLanguageModelV3(BigramBaseV2):
 
 class BigramLanguageModelV4(BigramBaseV2):
 	"""Embedding layer + linear layer + positional embedding + self-attention"""
-	def __init__(self, vocab_size, block_size, n_embed, device):
+	def __init__(self, vocab_size, block_size, n_embed, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)
@@ -136,7 +136,7 @@ class BigramLanguageModelV4(BigramBaseV2):
 
 class BigramLanguageModelV5(BigramBaseV2):
 	"""Embedding layer + linear layer + positional embedding + self-attention + multi-head attention"""
-	def __init__(self, vocab_size, block_size, n_embed, num_heads, device):
+	def __init__(self, vocab_size, block_size, n_embed, num_heads, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)
@@ -167,7 +167,7 @@ class BigramLanguageModelV5(BigramBaseV2):
 
 class BigramLanguageModelV6(BigramBaseV2):
 	"""Embedding layer + linear layer + positional embedding + multi-head attention + feed-forward"""
-	def __init__(self, vocab_size, block_size, n_embed, num_heads, device):
+	def __init__(self, vocab_size, block_size, n_embed, num_heads, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)
@@ -200,7 +200,7 @@ class BigramLanguageModelV6(BigramBaseV2):
 
 class BigramLanguageModelV7(BigramBaseV2):
 	"""Embedding layer + linear layer + positional embedding + multi-head attention + feed-forward + blocks"""
-	def __init__(self, vocab_size, block_size, n_embed, num_heads, device):
+	def __init__(self, vocab_size, block_size, n_embed, num_heads, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)
@@ -236,7 +236,7 @@ class BigramLanguageModelV7(BigramBaseV2):
 
 class BigramLanguageModelV8(BigramBaseV2):
 	"""Embedding layer + linear layer + positional embedding + multi-head attention + feed-forward + blocks with residual connections"""
-	def __init__(self, vocab_size, block_size, n_embed, num_heads, device):
+	def __init__(self, vocab_size, block_size, n_embed, num_heads, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)
@@ -272,7 +272,7 @@ class BigramLanguageModelV8(BigramBaseV2):
 
 class BigramLanguageModelV9(BigramBaseV2):
 	"""Embedding layer + linear layer + positional embedding + multi-head attention + feed-forward + blocks with residual connections and layernorm"""
-	def __init__(self, vocab_size, block_size, n_embed, num_heads, device):
+	def __init__(self, vocab_size, block_size, n_embed, num_heads, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)
@@ -312,7 +312,7 @@ class BigramLanguageModelV10(BigramBaseV2):
 	Embedding layer + linear layer + positional embedding + multi-head attention + feed-forward +
 	blocks with residual connections and layernorm + dropout
 	"""
-	def __init__(self, vocab_size, block_size, n_embed, num_heads, block_layers, dropout, device):
+	def __init__(self, vocab_size, block_size, n_embed, num_heads, block_layers, dropout, device, **kwargs):
 		super().__init__()
 		self.embedding = nn.Embedding(vocab_size, n_embed)
 		self.positional_embedding = nn.Embedding(block_size, n_embed)

@@ -1,6 +1,6 @@
 import torch
 
-from dataset import get_batch
+from app.dataset import get_batch
 
 
 @torch.no_grad()

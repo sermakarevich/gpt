@@ -2,8 +2,6 @@ import torch
 
 
 def get_tokens_from_text(text):
-	# https://github.com/google/sentencepiece
-	# https://github.com/openai/tiktoken
 	return sorted(list(set(text)))
 
 
